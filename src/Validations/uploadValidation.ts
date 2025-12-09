@@ -1,4 +1,4 @@
-import Yup from "yup";
+import * as Yup from "yup";
 
 export const uploadSchema = Yup.object().shape({
         fileName: Yup.string().required("filename is required"),
