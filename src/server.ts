@@ -5,10 +5,12 @@ import { AppDataSource } from "./Config/data_source";
 import express, { Request, Response }from  "express";
 import signupRoutes from "./Routes/signupRoutes"
 import loginRoutes from "./Routes/loginRoutes"
+import bodyParser from "body-parser";
  
 const app = express()
 
 app.use(express.json())
+app.use(bodyParser.json())
 
 app.get("/api/user", (_req:Request, res:Response)=>{
     res.json({
