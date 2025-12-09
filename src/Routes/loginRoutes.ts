@@ -1,5 +1,5 @@
 import { Router } from "express";
-import {login} from "../Controllers/loginController"
+import {login, uploadPhoto} from "../Controllers/loginController"
 import { authUser } from "../Middlewares/authMiddleware";
 
 
@@ -10,5 +10,7 @@ router.post("/login", login)
 router.get("/authorize", authUser,(req,res)=>{
     return res.json({message: "authorized user"})
 })
+
+router.post("/upload",uploadPhoto)
 
 export default router;
