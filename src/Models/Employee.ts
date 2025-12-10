@@ -24,10 +24,4 @@ export class Users{
         type: "varchar", length: 10, name: "u_phone"
     })
     userPhone: string;
-
-    @Column({
-        type: "varchar"
-    })
-    userPhoto: string;
-
 }
