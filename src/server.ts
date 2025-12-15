@@ -6,6 +6,7 @@ import express, { Request, Response }from  "express";
 import signupRoutes from "./Routes/signupRoutes"
 import loginRoutes from "./Routes/loginRoutes"
 import bodyParser from "body-parser";
+import { initializeRedisClient } from "./Utils/redis";
  
 const app = express()
 
@@ -23,17 +24,23 @@ app.get("/api/user", (_req:Request, res:Response)=>{
 app.use("/api/auth", signupRoutes, loginRoutes)
 
 
-AppDataSource.initialize()
-.then(()=>{
-    console.log(`server connection successfull in ${process.env.POSTGRES_PORT}`)
+async function startServer(){
+    await initializeRedisClient()
+    console.log("initialized the connection")
 
-    app.listen(process.env.PORT, ()=>{
-        console.log(`Server running on port ${process.env.PORT}`)
+    AppDataSource.initialize()
+    .then(()=>{
+        console.log(`server connection successfull in ${process.env.POSTGRES_PORT}`)
+
+        app.listen(process.env.PORT, ()=>{
+            console.log(`Server running on port ${process.env.PORT}`)
+        })
     })
-})
-.catch((err)=>{
-    console.error("error connecting to postgres DB", err)
-})
-
-
+    .catch((err)=>{
+        console.error("error connecting to postgres DB", err)
+    })
  
+}
+
+
+startServer()
