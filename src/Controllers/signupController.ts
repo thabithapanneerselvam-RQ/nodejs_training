@@ -8,7 +8,7 @@ export const signup = async(req: Request,res: Response)=>{
                 console.log(req.body)
         await signupSchema.validate(req.body);
         const user = await signupService(req.body)
-
+console.log("user",user)
         return res.status(200).json({
             message: "signup successfull",
             user
