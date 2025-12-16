@@ -2,8 +2,8 @@ import { findByEmail } from "../Repositories/authRepository"
 import bcrypt from "bcryptjs"
 import { generateToken } from "../Utils/jwt"
 import {transporter} from "../Utils/nodemailer"
-import {redisPublisher, redisSubscriber } from "../Utils/redis"
-
+import { emailQueue } from "../Queue/emailQueue"
+// import {redisPublisher, redisSubscriber } from "../Utils/redis"
 
 export const loginService = async(email: string, password: string)=>{
     const user = await findByEmail(email)
@@ -17,7 +17,8 @@ export const loginService = async(email: string, password: string)=>{
         email: user.userEmail
     })
 
-    await redisPublisher.publish("login-email", JSON.stringify({userEmail: user.userEmail, token}))
+    await emailQueue.add("send-email", {email,token})
+    // await redisPublisher.publish("login-email", JSON.stringify({userEmail: user.userEmail, token}))
     
     // const msg = {
     //     to: user.userEmail,
