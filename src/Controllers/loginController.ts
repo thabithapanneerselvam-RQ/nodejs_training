@@ -2,7 +2,7 @@ import { Request, Response } from "express"
 import {loginService} from "../Services/loginService"
 import { loginSchema} from "../Validations/loginValidation";
 import {uploadSchema} from "../Validations/uploadValidation"
-import { generatedUrl } from "../Utils/file";
+import { generatedUrl } from "../Utils/s3fileurl";
 
 export const login = async(req:Request, res: Response)=>{
     try{
