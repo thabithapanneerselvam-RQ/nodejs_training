@@ -7,6 +7,7 @@ import signupRoutes from "./Routes/signupRoutes"
 import loginRoutes from "./Routes/loginRoutes"
 import bodyParser from "body-parser";
 import { initializeRedisClient } from "./Utils/redis";
+import { globalErrorHandler } from "./Middlewares/globalErrorHandler";
  
 const app = express()
 
@@ -23,6 +24,7 @@ app.get("/api/user", (_req:Request, res:Response)=>{
 
 app.use("/api/auth", signupRoutes, loginRoutes)
 
+app.use(globalErrorHandler)
 
 async function startServer(){
     await initializeRedisClient()
