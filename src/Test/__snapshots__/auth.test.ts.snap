@@ -1,0 +1,20 @@
+// Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
+
+exports[`Auth API E2E Tests authorize 1`] = `
+{
+  "message": "authorized user",
+}
+`;
+
+exports[`Auth API E2E Tests signup 1`] = `
+{
+  "message": "signup successfull",
+  "user": {
+    "u_id": 12,
+    "userEmail": "nav@gmail.com",
+    "userName": "nav",
+    "userPassword": "$2b$10$ZfBFk/s7AG9Nj1j1yk6MLOgUFa6Q0bnZzHDsXWkziXD7C25yyO/Z2",
+    "userPhone": "9999991239",
+  },
+}
+`;

@@ -1,0 +1,2 @@
+hai this file is for write
+this is for checking append
