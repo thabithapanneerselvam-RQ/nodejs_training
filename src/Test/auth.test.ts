@@ -207,27 +207,38 @@ describe("Auth API E2E Tests", () => {
 
   beforeAll(async () => {
     await AppDataSource.initialize();
+    console.log("this is before all")
   });
+
+  beforeEach(async()=>{
+    console.log("this is before each test")
+  })
 
   afterAll(async () => {
     await AppDataSource.destroy();
+    console.log("this is after all")
   });
 
-    afterEach(()=>{
-        jest.clearAllMocks();
+
+    afterEach(async()=>{
+        await jest.clearAllMocks();
+        console.log("this is after each test")
     })
 
   it("signup", async () => {
     const res = await request(app)
       .post("/api/auth/signup")
       .send({
-        userName: "thabitha",
-        userEmail: "thabi@gmail.com",
-        userPassword: "thabitha123",
-        userPhone: "9999999999",
+        userName: "nav",
+        userEmail: "nav@gmail.com",
+        userPassword: "nav123",
+        userPhone: "9999991239",
       });
 
     expect(res.statusCode).toBe(200);
+    expect(res.body).toHaveProperty("message");
+    expect(res.body.user).toHaveProperty("u_id");
+    expect(res.body.user.userEmail).toBe("nav@gmail.com");
   });
 
   it("login", async () => {
@@ -239,6 +250,8 @@ describe("Auth API E2E Tests", () => {
       });
 
     token = res.body.token;
+    expect(res.body).toHaveProperty("message")
+    expect(res.body.user.userEmail).toBe("thabitha.pvst@gmail.com")
     expect(token).toBeDefined();
   });
 
