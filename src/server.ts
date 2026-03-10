@@ -13,6 +13,7 @@ const app = express()
 
 app.use(express.json())
 app.use(bodyParser.json())
+app.set("query parser", "extended");
 
 app.get("/api/user", (_req:Request, res:Response)=>{
     res.json({
